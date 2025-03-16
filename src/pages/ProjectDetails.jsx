@@ -4,10 +4,11 @@ import * as XLSX from "xlsx";
 import Sidebar from "../components/Sidebar";
 import {
   MdArrowBackIosNew,
+  MdOutlineInbox,
   MdOutlineSearch,
   MdOutlineSync,
 } from "react-icons/md";
-import avatar from "/public/Avatar.png";
+import avatar from "../assets/Avatar.png";
 
 const excelSerialToDate = (serial) => {
   const utcDays = Math.floor(serial - 25569);
@@ -64,7 +65,13 @@ const ProjectDetails = () => {
     loadProjects();
   }, [projectName]);
 
-  if (!project) return <div>Loading...</div>;
+  if (!project)
+    return (
+      <div className="flex flex-col items-center justify-center h-64 bg-[#FFFFFF] rounded-2xl shadow-lg">
+        <MdOutlineInbox className="text-6xl text-[#8B8BA2] mb-4" />
+        <p className="text-lg text-[#8B8BA2] font-medium">No entries to show</p>
+      </div>
+    );
 
   const tabs = ["Details", "Contractors", "Questions"];
 
